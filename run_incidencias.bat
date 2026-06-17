@@ -13,18 +13,13 @@ if exist "%TARGET_DIR%\.venv\Scripts\python.exe" (
 if not exist "logs" mkdir logs
 
 REM Rango de fechas opcional. Si se deja en blanco, se procesa solo el dia actual.
-set FECHA_INICIO=
-set FECHA_FIN=
-set /p FECHA_INICIO=Fecha inicio (YYYY-MM-DD, enter = hoy):
-if "%FECHA_INICIO%"=="" goto SIN_RANGO
+set FECHA_INICIO=%1
+set FECHA_FIN=%2
 
-set /p FECHA_FIN=Fecha fin (YYYY-MM-DD, enter = igual a inicio):
-if "%FECHA_FIN%"=="" set FECHA_FIN=%FECHA_INICIO%
-
-:SIN_RANGO
 if "%FECHA_INICIO%"=="" (
     set FECHA_ARGS=
 ) else (
+    if "%FECHA_FIN%"=="" set FECHA_FIN=%FECHA_INICIO%
     set FECHA_ARGS=--fecha-inicio %FECHA_INICIO% --fecha-fin %FECHA_FIN%
 )
 
