@@ -1,0 +1,44 @@
+services:
+  # Genera + notifica (igual que run_diario.bat). El contenedor corre y termina
+  # (cron del host lo invoca).
+  diario:
+    build: .
+    image: talent-tasks-sync:latest
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs
+    command: ["sh", "-c", "python main_generar.py && python main_notificar.py"]
+
+  # Solo generacion de tareas
+  generar:
+    build: .
+    image: talent-tasks-sync:latest
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs
+    command: ["python", "main_generar.py"]
+    profiles: ["manual"]
+
+  # Solo notificaciones
+  notificar:
+    build: .
+    image: talent-tasks-sync:latest
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs
+    command: ["python", "main_notificar.py"]
+    profiles: ["manual"]
+
+  # Limpieza de tareas auto-generadas (por defecto en modo dry-run, no borra nada)
+  limpiar:
+    build: .
+    image: talent-tasks-sync:latest
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs
+    command: ["python", "cleanup.py", "--dry-run"]
+    profiles: ["manual"]

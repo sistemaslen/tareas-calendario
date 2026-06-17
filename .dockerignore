@@ -1,0 +1,22 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.venv/
+logs/
+*.log
+.git/
+.gitignore
+README.md
+*.bat
+
+# Implementacion PHP legacy, no usada por main_generar.py / main_notificar.py
+vendor/
+composer.json
+composer.lock
+sql/
