@@ -79,8 +79,8 @@ def insert_notificaciones(
 
     sql = """
         INSERT INTO notificaciones_app
-            (user_id, tarea_id, task_code, employee_name, employee_number, message, is_read, created_at)
-        VALUES (?, ?, ?, ?, ?, ?, 0, ?)
+            (user_id, tarea_id, task_code, employee_name, employee_number, message, is_read, is_dismissed, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, 0, 0, ?)
     """
 
     now = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
